@@ -16,25 +16,24 @@ package com.helloworld.model;
 	@Entity
 	public class Brand {
 		
-		@Expose
+		
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private int brandId;
 		
-		@Expose
-		@NotEmpty(message = "Brand Name cannot be Empty")
+		
 		private String brandName;
 		
-		@Expose
+	
 		@NotEmpty(message = "Brand Description cannot be Empty")
 		private String brandDescription;
 		
-		@Expose
+	
 		private int subCategoryId;
 		
-		@Expose
+	
 		@ManyToOne
-		@JoinColumn(name="subCategoryId", nullable=false, updatable=false, insertable=false)
+		@JoinColumn(name="subCategoryId",nullable=false, updatable=false, insertable=false)
 		private SubCategory subCategory;
 
 		public int getBrandId() {

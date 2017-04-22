@@ -4,12 +4,12 @@ package com.helloworld.dao;
 
 	import java.util.List;
 
-	import org.hibernate.SessionFactory;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 	import org.springframework.beans.factory.annotation.Autowired;
 	import org.springframework.stereotype.Repository;
 
-	import com.google.gson.Gson;
-import com.helloworld.model.Supplier;
+	import com.helloworld.model.Supplier;
 	
 
 	
@@ -20,32 +20,35 @@ import com.helloworld.model.Supplier;
 		@Autowired
 		private SessionFactory sessionFactory;
 		
-		public void addSupplier(Supplier supplier) {
-			sessionFactory.getCurrentSession().saveOrUpdate(supplier);
+		public void addSupplier(Supplier supplier) 
+		{
+			Session session = this.sessionFactory.getCurrentSession();
+			session.saveOrUpdate(supplier);
 		}
-
-		public List<Supplier> fetchAllSupplier() {
-			List<Supplier> getList = sessionFactory.getCurrentSession().createQuery("from Supplier").getResultList();
-			return getList;
+		@SuppressWarnings("unchecked")
+		public List<Supplier> listSupplier() 
+		{
+			Session session = this.sessionFactory.getCurrentSession();
+			List<Supplier> SupplierList = session.createQuery("from Supplier").list();
+			return SupplierList;
 		}
-
-		public String fetchAllSupplierByJson() {
-			List<Supplier> getList = sessionFactory.getCurrentSession().createQuery("from Supplier").getResultList();
-			Gson g = new Gson();
-			String list = g.toJson(getList);
-			return list;
+		@SuppressWarnings("unchecked")
+		public Supplier getSupplierById(int supplierId) 
+		{
+			String hql = "from Supplier where supplierId="+supplierId;
+			List<Supplier>slist = sessionFactory.getCurrentSession().createQuery(hql).list();
+			return slist.get(0);
 		}
-
-		public Supplier getSupplierById(int supplierId) {
-			List<Supplier> getList = sessionFactory.getCurrentSession().createQuery("from Supplier where supplierId = "+supplierId).getResultList();
-			return getList.get(0);
-		}
-
-		public void deleteSupplier(int supplierId) {
-			Supplier s = new Supplier();
+		public void deleteSupplier(int supplierId) 
+		{
+			Supplier s=new Supplier();
 			s.setSupplierId(supplierId);
 			sessionFactory.getCurrentSession().delete(s);
 		}
-		
-		
-}
+		@SuppressWarnings("unchecked")
+		public Supplier getSupplierByName(String supplierName) 
+		{
+			List<Supplier> slist = sessionFactory.getCurrentSession().createQuery("from Supplier where supplierName = "+"'"+supplierName+"'").list();
+			return slist.get(0);
+		}
+	}

@@ -9,7 +9,9 @@ package com.helloworld.service;
 	import org.springframework.transaction.annotation.Transactional;
 
 import com.helloworld.dao.BrandDAOImpl;
+
 import com.helloworld.model.Brand;
+
 
 	
 
@@ -17,27 +19,34 @@ import com.helloworld.model.Brand;
 	@Transactional
 	public class BrandService {
 
-		@Autowired
-		private BrandDAOImpl brandDAOImpl;
-
-		public void addBrand(Brand brand) {
-			brandDAOImpl.addBrand(brand);
+		
+		
+			@Autowired
+			private BrandDAOImpl branddaoimpl;
+			
+			public void addBrand(Brand brand)
+			{
+				branddaoimpl.addBrand(brand);
+			}
+			public List<Brand> listBrand()
+			{
+				return branddaoimpl.listBrand();
+			}
+			public Brand getBrandById(int brandId)
+			{
+				return branddaoimpl.getBrandById(brandId);
+			}
+			public Brand getBrandByName(String brandName)
+			{
+				return branddaoimpl.getBrandByName(brandName);
+			}
+			public Brand editBrandById(int brandId)
+			{
+				return branddaoimpl.getBrandById(brandId);
+			}
+			public void deleteBrand(int brandId)
+			{
+				branddaoimpl.deleteBrand(brandId);
+			}
 		}
-
-		public List<Brand> fetchAllBrand() {
-			return brandDAOImpl.fetchAllBrand();
-		}
-
-		public String fetchAllBrandByJson() {
-			return brandDAOImpl.fetchAllBrandByJson();
-		}
-
-		public Brand getBrandById(int brandId) {
-			return brandDAOImpl.getBrandById(brandId);
-		}
-
-		public void deleteBrand(int brandId) {
-			brandDAOImpl.deleteBrand(brandId);
-		}
-	}
 

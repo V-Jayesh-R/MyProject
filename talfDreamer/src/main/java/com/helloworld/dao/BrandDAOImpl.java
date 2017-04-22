@@ -2,13 +2,14 @@ package com.helloworld.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.helloworld.model.Brand;
+
+
 
 
 @Repository
@@ -17,31 +18,35 @@ public class BrandDAOImpl implements BrandDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public void addBrand(Brand brand) {
-		sessionFactory.getCurrentSession().saveOrUpdate(brand);
+	public void addBrand(Brand brand) 
+	{
+		Session session = this.sessionFactory.getCurrentSession();
+		session.saveOrUpdate(brand);
 	}
-
-	public List<Brand> fetchAllBrand() {
-		List<Brand> getList = sessionFactory.getCurrentSession().createQuery("from Brand").getResultList();
-		return getList;
+	@SuppressWarnings("unchecked")
+	public List<Brand> listBrand() 
+	{
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Brand> BrandList = session.createQuery("from Brand").list();
+		return BrandList;
 	}
-
-	public String fetchAllBrandByJson() {
-		List<Brand> getList = sessionFactory.getCurrentSession().createQuery("from Brand").getResultList();
-		Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		String list = g.toJson(getList);
-		return list;
+	@SuppressWarnings("unchecked")
+	public Brand getBrandById(int brandId) 
+	{
+		String hql = "from Brand where brandId="+brandId;
+		List<Brand> slist = sessionFactory.getCurrentSession().createQuery(hql).list();
+		return slist.get(0);
 	}
-
-	public Brand getBrandById(int brandId) {
-		List<Brand> getList = sessionFactory.getCurrentSession().createQuery("from Brand where brandId = "+brandId).getResultList();
-		return getList.get(0);
+	public void deleteBrand(int brandId) 
+	{
+		Brand s=new Brand();
+		s.setBrandId(brandId);
+		sessionFactory.getCurrentSession().delete(s);
 	}
-
-	public void deleteBrand(int brandId) {
-		Brand b = new Brand();
-		b.setBrandId(brandId);
-		sessionFactory.getCurrentSession().delete(b);
+	@SuppressWarnings("unchecked")
+	public Brand getBrandByName(String brandName) 
+	{
+		List<Brand> slist = sessionFactory.getCurrentSession().createQuery("from Brand where brandName = "+"'"+brandName+"'").list();
+		return slist.get(0);
 	}
-
 }

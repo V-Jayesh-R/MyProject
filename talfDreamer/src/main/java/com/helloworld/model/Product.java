@@ -1,7 +1,6 @@
 package com.helloworld.model;
 
 
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,221 +16,156 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.annotations.Expose;
 
 @Entity
-public class Product {
-
-	@Expose
+public class Product 
+{
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Expose
 	private int productId;
-
+	
+	@NotEmpty(message="Product Name can not be empty")
 	@Expose
-	@NotEmpty(message = "Product Name cannot be Empty")
 	private String productName;
-
+	
+	@NotEmpty(message="Product Description can not be empty")
 	@Expose
-	@NotEmpty(message = "Product Description cannot be Empty")
 	private String productDescription;
-
 	@Expose
-	private double productActualPrice;
-
+	private int productQuantity;
 	@Expose
-	private double productDiscount;
-	
+	private double productPrice;
 	@Expose
-	private double productFinalPrice;
-
+	private int productDiscount;
 	@Expose
-	private int productStock;
-	
-	@Expose
-	private int productReturnDays;
-	
-	@Expose
-	@NotEmpty(message = "Product Made Country cannot be Empty")
-	private String productMadeCountry;
-
+	private double productAmount;
 	@Expose
 	private int categoryId;
-
 	@Expose
 	private int subCategoryId;
-
 	@Expose
 	private int supplierId;
-
+	
 	@Expose
 	private int brandId;
-
-	@Expose
-	@ManyToOne
-	@JoinColumn(name = "categoryId", nullable = false, updatable = false, insertable = false)
-	private Category category;
-
-	@Expose
-	@ManyToOne
-	@JoinColumn(name = "subCategoryId", nullable = false, updatable = false, insertable = false)
-	private SubCategory subCategory;
-
-	@Expose
-	@ManyToOne
-	@JoinColumn(name = "supplierId", nullable = false, updatable = false, insertable = false)
-	private Supplier supplier;
-
-	@Expose
-	@ManyToOne
-	@JoinColumn(name = "brandId", nullable = false, updatable = false, insertable = false)
-	private Brand brand;
-
+	
 	@Transient
-	private List<MultipartFile> productImage;
-
+	private MultipartFile productImg;
+	
+	@Expose
+	@ManyToOne
+	@JoinColumn(name="categoryId", updatable=false, insertable=false, nullable=false)
+	private Category category;
+	@Expose
+	@ManyToOne
+	@JoinColumn(name="subCategoryId", updatable=false, insertable=false, nullable=false)
+	private SubCategory subCategory;
+	@Expose
+	@ManyToOne
+	@JoinColumn(name="supplierId", updatable=false, insertable=false, nullable=false)
+	private Supplier supplier;
+	@Expose
+	@ManyToOne
+	@JoinColumn(name="brandId", updatable=false, insertable=false, nullable=false)
+	private Brand brand;
 	public int getProductId() {
 		return productId;
 	}
-
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-
 	public String getProductName() {
 		return productName;
 	}
-
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-
 	public String getProductDescription() {
 		return productDescription;
 	}
-
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
 	}
-
-	public double getProductActualPrice() {
-		return productActualPrice;
+	public int getProductQuantity() {
+		return productQuantity;
 	}
-
-	public void setProductActualPrice(double productActualPrice) {
-		this.productActualPrice = productActualPrice;
+	public void setProductQuantity(int productQuantity) {
+		this.productQuantity = productQuantity;
 	}
-
-	public double getProductDiscount() {
+	public double getProductPrice() {
+		return productPrice;
+	}
+	public void setProductPrice(double productPrice) {
+		this.productPrice = productPrice;
+	}
+	public int getProductDiscount() {
 		return productDiscount;
 	}
-
-	public void setProductDiscount(double productDiscount) {
+	public void setProductDiscount(int productDiscount) {
 		this.productDiscount = productDiscount;
 	}
-
-	public double getProductFinalPrice() {
-		return productFinalPrice;
+	public double getProductAmount() {
+		return productAmount;
 	}
-
-	public void setProductFinalPrice(double productFinalPrice) {
-		this.productFinalPrice = productFinalPrice;
+	public void setProductAmount(double productAmount) {
+		this.productAmount = productAmount;
 	}
-
-	public int getProductStock() {
-		return productStock;
-	}
-
-	public void setProductStock(int productStock) {
-		this.productStock = productStock;
-	}
-
-	public int getProductReturnDays() {
-		return productReturnDays;
-	}
-
-	public void setProductReturnDays(int productReturnDays) {
-		this.productReturnDays = productReturnDays;
-	}
-
-	public String getProductMadeCountry() {
-		return productMadeCountry;
-	}
-
-	public void setProductMadeCountry(String productMadeCountry) {
-		this.productMadeCountry = productMadeCountry;
-	}
-
 	public int getCategoryId() {
 		return categoryId;
 	}
-
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
-
 	public int getSubCategoryId() {
 		return subCategoryId;
 	}
-
 	public void setSubCategoryId(int subCategoryId) {
 		this.subCategoryId = subCategoryId;
 	}
-
 	public int getSupplierId() {
 		return supplierId;
 	}
-
 	public void setSupplierId(int supplierId) {
 		this.supplierId = supplierId;
 	}
-
-	public int getBrandId() {
-		return brandId;
+	public MultipartFile getProductImg() {
+		return productImg;
 	}
-
-	public void setBrandId(int brandId) {
-		this.brandId = brandId;
+	public void setProductImg(MultipartFile productImg) {
+		this.productImg = productImg;
 	}
-
 	public Category getCategory() {
 		return category;
 	}
-
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-
 	public SubCategory getSubCategory() {
 		return subCategory;
 	}
-
 	public void setSubCategory(SubCategory subCategory) {
 		this.subCategory = subCategory;
 	}
-
 	public Supplier getSupplier() {
 		return supplier;
 	}
-
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
-
+	public int getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(int brandId) {
+		this.brandId = brandId;
+	}
 	public Brand getBrand() {
 		return brand;
 	}
-
 	public void setBrand(Brand brand) {
 		this.brand = brand;
 	}
 
-	public List<MultipartFile> getProductImage() {
-		return productImage;
-	}
-
-	public void setProductImage(List<MultipartFile> productImage) {
-		this.productImage = productImage;
-	}
 
 	
+	
 }
-
-
-

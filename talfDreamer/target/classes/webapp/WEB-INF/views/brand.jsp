@@ -1,162 +1,73 @@
-<%@ include file="header.jsp"%>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+        <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Brands</title>
+<link href="Resources/css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="Resources/css/bootstrap.min.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
 
-<style type="text/css">
-body {
-	padding-top: 140px;
-}
-</style>
+	
+	<div class="container" >
+	<div class="text-center">  		   
+	 	 <a href="category" class="btn btn-info" onclick="button" >Category</a>
+	 	  <a href="subcategory" class="btn btn-info" onclick="button" >Sub Category</a>
+	 	  <a href="product" class="btn btn-info" onclick="button" >Product</a>
 
-<script>
-	$(document).ready(function() {
-		$("tbody").hide();
-		$("button").click(function() {
-			$("tbody").toggle(500);
-		});
-	});
-	$(document).ready(function() {
-		$('.search1').hide();
-		$('button').click(function() {
-			$('.search1').toggle(500);
-		});
-	});
-</script>
-
-<div class="container">
-
-	<div class="text-center">
-		<h1>
-			<strong>Brand Form</strong>
-		</h1>
+	</div>
 	</div>
 	<br>
-	<div class="form">
-		<form:form modelAttribute="brand" action="addBrand">
-			<form:input path="brandId" type="hidden" />
-
-			<div class="row">
-				<div class="col-xs-12 col-sm-4 col-md-4">
-					<form:label path="brandName">Enter Brand Name</form:label>
-				</div>
-				<div class="col-xs-12 col-sm-4 col-md-4">
-					<form:input class="form-control" path="brandName"
-						placeholder="Brand Name" autofocus="true" />
-				</div>
-				<div class="col-xs-12 col-sm-4 col-md-4">
-					<form:errors cssClass="error" path="brandName" />
-				</div>
-			</div>
-			<br>
-			<div class="row">
-				<div class="col-xs-12 col-sm-4 col-md-4">
-					<form:label path="brandDescription">Enter Brand Description</form:label>
-				</div>
-				<div class="col-xs-12 col-sm-4 col-md-4">
-					<form:input class="form-control" path="brandDescription"
-						placeholder="Brand Description" />
-				</div>
-				<div class="col-xs-12 col-sm-4 col-md-4">
-					<form:errors cssClass="error" path="brandDescription" />
-				</div>
-			</div>
-			<br>
-			<div class="row">
-				<div class="col-xs-12 col-sm-4  col-md-4">
-					<form:label path="subCategoryId">Select SubCategory of Brand</form:label>
-				</div>
-				<div class="col-xs-12 col-sm-4  col-md-4">
-					<form:select class="form-control" path="subCategoryId"
-						items="${subCategoryList}" itemValue="subCategoryId"
-						itemLabel="subCategoryName" />
-				</div>
-			</div>
-			<br>
-			<div class="row">
-				<div class="col-sm-12 col-md-12">
-					<div class="text-center">
-						<button class="btn btn-success" type="submit">${btnLabel}
-							<span class="glyphicon glyphicon-plus"></span>
-						</button>
-						<button class="btn btn-danger" type="reset">
-							Reset <span class="glyphicon glyphicon-repeat"></span>
-						</button>
-					</div>
-				</div>
-			</div>
-		</form:form>
-	</div>
-
+	
+	<h2 align="center">ADD Brand</h2>
+	<form:form method="POST" path ="addbrand" modelAttribute="brand" action="addbrand" class="form" >
+	<div class="container">
+	<form:input type="hidden" path="brandId" class="form-control"/>
+	<form:input path="BrandName" placeholder="Brand Name" class="form-control"/>
+						<form:errors path="brandName" cssClass="error"/>
 	<br>
-	<hr
-		style="height: 2px; border-width: 0; color: gray; background-color: gray">
+	<form:input path="brandDescription" placeholder=" Brand Description" class="form-control"/>
+						<form:errors path="brandDescription" cssClass="error"/>
 	<br>
-
-	<div ng-app="myApp">
-		<div class="text-center">
-			<h1>Brand List</h1>
-		</div>
-		<br>
-		<div class="row">
-			<div class="col-xs-4 col-md-4 col-sm-4"></div>
-			<div class="col-xs-4 col-md-4 col-sm-4">
-				<button type="button" class="btn btn-primary btn-block">Show/Hide
-					Table</button>
-			</div>
-			<div class="col-xs-4 col-md-4 col-sm-4"></div>
-		</div>
-		<br>
-		<div class="search1 row">
-			<div class="col-xs-3 col-md-3 col-sm-3"></div>
-			<div class="col-xs-6 col-md-6 col-sm-6">
-				<input class="form-control" type="text" ng-model="search"
-					placeholder="Search for keywords.." />
-			</div>
-			<div class="col-xs-3 col-md-3 col-sm-3"></div>
-		</div>
-		<br>
-
-		<div class="table-responsive">
-			<table class="table table-bordered table-striped table-hover" ng-controller="myController">
-				<thead>
-					<tr>
-						<th>Brand Name</th>
-						<th>Brand Description</th>
-						<th>Sub-Category Name</th>
-						<th>Brand Edit</th>
-						<th>Brand Delete</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="bList in myscope | filter:search">
-						<td>{{bList.brandName}}</td>
-						<td>{{bList.brandDescription}}</td>
-						<td>{{bList.subCategory.subCategoryName}}</td>
-						<td><a href="editBrand-{{bList.brandId}}"
-							class="btn btn-primary" role="button">EDIT</a></td>
-						<td><a href="deleteBrand-{{bList.brandId}}"
-							class="btn btn-warning" role="button">DELETE</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+	 <form:select path="subCategoryId" items="${subcategoryList}" itemValue="subCategoryId" itemLabel="subCategoryName" class="form-control" ></form:select>
+    								<br>
+  
+	
+	<br>
+	<input class="btn btn-primary" type="Submit" name="addbrand">
 	</div>
-	<br> <br>
 
-	<div class="row">
-		<div class="col-xs-4 col-md-4 col-sm-4"></div>
-		<div class="col-xs-4 col-md-4 col-sm-4">
-			<a href="/talfDreamer/" class="btn btn-primary btn-block"
-				role="button">Return to home</a>
-		</div>
-		<div class="col-xs-4 col-md-4 col-sm-4"></div>
-	</div>
-</div>
-<br>
+	</form:form>
+		<table class="table table-hover">
+           <tr>
+           <th>Brand Id</th>
+           <th>Brand Name</th>
+           <th>Brand Description</th>
+	       <th>Edit Brand</th>
+           <th>Delete Brand</th>
+           </tr>
+           
+           
+    	<c:forEach var="c" items="${brandList}">
+		   <tr> 
+			<td>${c.brandId}</td>
+			<td>${c.brandName}</td>
+			<td>${c.brandDescription}</td>
+			<td><a href="editsubsubCategory-${c.brandId}"><button type="button" class="btn btn-success">Edit</button></a></td>
+			<td><a href="deletesubsubCategory-${c.brandId}"><button type="button" class="btn btn-success">Delete</button></a></td>
+			</tr>
+		</c:forEach>
+        </table>
 
-<script>
-	var a = angular.module('myApp', []);
-	a.controller('myController', function($scope) {
-		$scope.myscope = ${brandListByJson}
-	});
-</script>
+</body>
+</html>

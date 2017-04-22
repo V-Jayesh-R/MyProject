@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.helloworld.model.Supplier;
 import com.helloworld.service.SupplierService;
@@ -16,45 +17,41 @@ import com.helloworld.service.SupplierService;
 
 
 @Controller
-public class SupplierController {
-
+public class SupplierController 
+{
 	@Autowired
 	private SupplierService supplierService;
-
-	@RequestMapping("/supplierPage")
-	public String getSupplierPage(Model model) {
-		model.addAttribute("supplier", new Supplier());
-		model.addAttribute("supplierList", supplierService.fetchAllSupplier());
-		model.addAttribute("supplierListByJson", supplierService.fetchAllSupplierByJson());
-		model.addAttribute("btnLabel", "Add Supplier");
-		return "suppliers";
+	
+	@RequestMapping("/supplier")
+	public String getSupplier(Model model) 
+	{
+		model.addAttribute("supplier",new Supplier());
+		model.addAttribute("supplierList",supplierService.listSupplier());
+		return "supplier";
 	}
-
-	@RequestMapping("/addSupplier")
-	public String addSupplier(@Valid @ModelAttribute("supplier") Supplier supplier, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("supplierList", supplierService.fetchAllSupplier());
-			model.addAttribute("supplierListByJson", supplierService.fetchAllSupplierByJson());
-			model.addAttribute("btnLabel", "Retry");
-			return "suppliers";
+	@RequestMapping("/addsupplier")
+	public String addSupplier(@Valid@ModelAttribute("supplier") Supplier supplier, BindingResult result) 
+	{	
+		if(result.hasErrors())
+		{
+			return "supplier";
 		}
 		supplierService.addSupplier(supplier);
-		return "redirect:/supplierPage";
+		return "redirect:/supplier";
 	}
-
-	@RequestMapping("/editSupplier-{supplierId}")
-	public String editSupplier(Model model, @PathVariable("supplierId") int supplierId) {
-		model.addAttribute("supplier", supplierService.getSupplierById(supplierId));
-		model.addAttribute("supplierList", supplierService.fetchAllSupplier());
-		model.addAttribute("supplierListByJson", supplierService.fetchAllSupplierByJson());
-		model.addAttribute("btnLabel", "Edit Supplier");
-		return "suppliers";
+	@RequestMapping(value="/editsupplier-{supplierId}", method=RequestMethod.GET)
+	public String editSupplier(@PathVariable("supplierId")int supplierId,Model model)
+	{
+		Supplier supplier = supplierService.getSupplierById(supplierId);
+		System.out.println("id is:"+ supplier.getSupplierId());
+		model.addAttribute("supplier",supplier);
+		model.addAttribute("supplierList",supplierService.listSupplier());
+		return "supplier";
 	}
-
-	@RequestMapping("/deleteSupplier-{supplierId}")
-	public String deleteSupplier(@PathVariable("supplierId") int supplierId) {
+	@RequestMapping("/deletesupplier-{supplierId}")
+	public String deleteSupplier(@PathVariable("supplierId") int supplierId)
+	{
 		supplierService.deleteSupplier(supplierId);
-		return "redirect:/supplierPage";
+		return "redirect:/supplier";
 	}
-
 }

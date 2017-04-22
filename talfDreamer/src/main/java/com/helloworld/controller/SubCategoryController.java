@@ -30,7 +30,7 @@ public class SubCategoryController
 		model.addAttribute("subCategory",new SubCategory());
 		model.addAttribute("category", new Category());
 		model.addAttribute("categoryList", categoryService.getCategorylist());
-		//model.addAttribute("subCategoryList",subCategoryService.listSubCategory());
+		model.addAttribute("subCategoryList",subcategoryservice.listSubCategory());
 		return "subcategoryform";
 	}
 	

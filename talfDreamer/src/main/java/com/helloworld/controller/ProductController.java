@@ -13,12 +13,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.helloworld.model.Brand;
+import com.helloworld.model.Category;
 import com.helloworld.model.Product;
+import com.helloworld.model.SubCategory;
+import com.helloworld.model.Supplier;
 import com.helloworld.service.BrandService;
 import com.helloworld.service.CategoryService;
 import com.helloworld.service.ProductService;
@@ -26,123 +30,117 @@ import com.helloworld.service.SubCategoryService;
 import com.helloworld.service.SupplierService;
 
 
-@Controller
-public class ProductController {
 
+@Controller
+public class ProductController 
+{
 	@Autowired
 	private ProductService productService;
-
 	@Autowired
 	private CategoryService categoryService;
-
 	@Autowired
 	private SubCategoryService subCategoryService;
-
 	@Autowired
 	private SupplierService supplierService;
-
 	@Autowired
 	private BrandService brandService;
-
-	private String Data_Folder = "D:\\NewProject\\talfDreamer\\src\\main\\webapp\\resources\\ProductImages\\";
-
-	@RequestMapping("/productPage")
-	public String getProductPage(Model model) {
-		model.addAttribute("product", new Product());
-		model.addAttribute("productList", productService.fetchAllProduct());
-		model.addAttribute("subCategoryList", subCategoryService.listSubCategory());
-		model.addAttribute("categoryList", categoryService.getCategorylist());
-		model.addAttribute("supplierList", supplierService.fetchAllSupplier());
-		model.addAttribute("brandList", brandService.fetchAllBrand());
-
-		model.addAttribute("productListByJson", productService.fetchAllProductByJson());
+	
+	@RequestMapping("/product")
+	public String getProduct(Model model) 
+	{
+		model.addAttribute("product",new Product());
+		model.addAttribute("category", new Category());
+		model.addAttribute("subcategory", new SubCategory());
+		model.addAttribute("supplier", new Supplier());
+		model.addAttribute("brand", new Brand());
 		
 		
-		model.addAttribute("supplierListByJson", supplierService.fetchAllSupplierByJson());
-		model.addAttribute("brandListByJson", brandService.fetchAllBrandByJson());
-		model.addAttribute("btnLabel", "Add Product");
+		
+		model.addAttribute("productList",productService.listProduct());
+		model.addAttribute("categoryList",categoryService.getCategorylist());
+		model.addAttribute("subCategoryList",subCategoryService.listSubCategory());
+		model.addAttribute("supplierList",supplierService.listSupplier());
+		model.addAttribute("brandList",brandService.listBrand());
+		
 		return "product";
 	}
-
-	@RequestMapping("/addProduct")
-	public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult result,
-			@RequestParam("productImage") MultipartFile productImage, Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("productList", productService.fetchAllProduct());
+	
+	@RequestMapping("/addproduct")
+	public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model)  
+	{
+		if(result.hasErrors())
+		{
 			model.addAttribute("subCategoryList", subCategoryService.listSubCategory());
 			model.addAttribute("categoryList", categoryService.getCategorylist());
-			model.addAttribute("supplierList", supplierService.fetchAllSupplier());
-			model.addAttribute("brandList", brandService.fetchAllBrand());
-			model.addAttribute("productListByJson", productService.fetchAllProductByJson());
-			
-			model.addAttribute("supplierListByJson", supplierService.fetchAllSupplierByJson());
-			model.addAttribute("brandListByJson", brandService.fetchAllBrandByJson());
-			model.addAttribute("btnLabel", "Retry");
+			model.addAttribute("supplierList", supplierService.listSupplier());
+			model.addAttribute("brandList", brandService.listBrand());
 			return "product";
 		}
-		else {
-			productService.addProduct(product);
-
-			if (!productImage.isEmpty()) {
-				try {
-					byte[] bytes = productImage.getBytes();
-
-					File directory = new File(Data_Folder + File.separator);
-					if (!directory.exists()) {
-						directory.mkdirs();
-					}
-
-					File imageFile = new File(directory.getAbsolutePath() + File.separator + "productImage-"
-							+ product.getProductId() + ".jpg");
-					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(imageFile));
-					stream.write(bytes);
-					stream.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-					model.addAttribute("fmessage", "Image Upload Failed.try again");
-				}
-				model.addAttribute("filemessage", "Image Upload Successful");
-			} else {
-				model.addAttribute("filemessage", "Image file is required");
-			}
-		}
+	
 		productService.addProduct(product);
-		return "redirect:/productPage";
+		
+			
+		//Multipart File Upload
+		String path="C:\\Users\\Jayesh\\workspace\\talfDreamer\\src\\main\\resources\\ProductImages\\productimage\\";
+	try{
+		path = path+""+product.getProductId()+".jpg";
+		System.out.println("Image Path is:"+path);
+	}
+	catch(Exception e)
+	{
+		
+		System.out.println("Image Path is invalid");
 	}
 	
-	@RequestMapping("/editProduct-{productId}")
-	public String editProduct(Model model,@PathVariable("productId") int productId)
+			
+		
+		
+		try
+		{
+		File f = new File(path);
+		MultipartFile m = product.getProductImg();
+		byte[] b =  m.getBytes();
+		FileOutputStream fos = new FileOutputStream(f);
+		BufferedOutputStream bos = new BufferedOutputStream(fos);
+		bos.write(b);
+		bos.close();
+		}
+				catch (Exception e)
+				{
+					e.getMessage();
+					
+				}
+		
+		return "redirect:/product";
+		}
+	
+	@RequestMapping(value="/viewproduct-{productId}", method=RequestMethod.GET)
+	public String viewProduct (@PathVariable("productId") int productId,Model model)
 	{
-		model.addAttribute("product", productService.getProductById(productId));
-		
-		model.addAttribute("productList", productService.fetchAllProduct());
-		model.addAttribute("subCategoryList", subCategoryService.listSubCategory());
-		model.addAttribute("categoryList", categoryService.getCategorylist());
-		model.addAttribute("supplierList", supplierService.fetchAllSupplier());
-		model.addAttribute("brandList", brandService.fetchAllBrand());
-		
-		model.addAttribute("productListByJson", productService.fetchAllProductByJson());
-
-		model.addAttribute("supplierListByJson", supplierService.fetchAllSupplierByJson());
-		model.addAttribute("brandListByJson", brandService.fetchAllBrandByJson());
-		model.addAttribute("btnLabel","Edit Product");
+		Product p = productService.getProductById(productId);
+		Gson e = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String productData = e.toJson(p);
+		model.addAttribute("productData", productData);
+		return "ViewProduct";
+	}
+	
+	@RequestMapping(value="/editproduct-{productId}", method=RequestMethod.GET)
+	public String editProduct (@PathVariable("productId") int productId,Model model)
+	{
+		Product product=productService.getProductById(productId);
+		System.out.println("id is:"+product.getProductId());
+		model.addAttribute("product", product);
+		model.addAttribute("productList",productService.listProduct());
+		model.addAttribute("supplierList",supplierService.listSupplier());
+		model.addAttribute("brandList",brandService.listBrand());
+		model.addAttribute("subCategoryList",subCategoryService.listSubCategory());
+		model.addAttribute("categoryList",categoryService.getCategorylist());
 		return "product";
 	}
-	
-	@RequestMapping("/deleteProduct-{productId}")
+	@RequestMapping("/deleteproduct-{productId}")
 	public String deleteProduct(@PathVariable("productId") int productId)
 	{
 		productService.deleteProduct(productId);
-		return "redirect:/productPage";
-	}
-
-	@RequestMapping("/viewProduct-{productId}")
-	public String viewProduct(@PathVariable("productId") int productId, Model model)
-	{
-		Product p = productService.getProductById(productId);
-		Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		String jsonView = g.toJson(p);
-		model.addAttribute("product", jsonView);
-		return "viewproduct";
+		return "redirect:/product";
 	}
 }

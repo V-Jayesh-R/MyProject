@@ -12,32 +12,39 @@ import com.helloworld.dao.SupplierDAOImpl;
 import com.helloworld.model.Supplier;
 
 	
-	@Service
-	@Transactional
-	public class SupplierService {
-
-		@Autowired
-		private SupplierDAOImpl supplierDAIOImpl;
-
-		public void addSupplier(Supplier supplier) {
-			supplierDAIOImpl.addSupplier(supplier);
-		}
-
-		public List<Supplier> fetchAllSupplier() {
-			return supplierDAIOImpl.fetchAllSupplier();
-		}
-
-		public String fetchAllSupplierByJson() {
-			return supplierDAIOImpl.fetchAllSupplierByJson();
-		}
-
-		public Supplier getSupplierById(int supplierId) {
-			return supplierDAIOImpl.getSupplierById(supplierId);
-		}
-
-		public void deleteSupplier(int supplierId) {
-			supplierDAIOImpl.deleteSupplier(supplierId);
-		}
-
+@Service
+@Transactional
+public class SupplierService 
+{
+	@Autowired
+	private SupplierDAOImpl supplierDaoImpl;
+	
+	public void addSupplier(Supplier supplier)
+	{
+		this.supplierDaoImpl.addSupplier(supplier);
 	}
+		
+	public List<Supplier> listSupplier()
+	{
+		return this.supplierDaoImpl.listSupplier();
+	}
+	
+	public Supplier getSupplierById(int supplierId)
+	{
+		return this.supplierDaoImpl.getSupplierById(supplierId);
+	}
+	
+	public Supplier getSupplierByName(String supplierName)
+	{
+		return this.supplierDaoImpl.getSupplierByName(supplierName);
+	}
+	public Supplier editSupplierById(int supplierId)
+	{
+		return supplierDaoImpl.getSupplierById(supplierId);
+	}
+	public void deleteSupplier(int supplierId)
+	{
+		supplierDaoImpl.deleteSupplier(supplierId);
+	}
+}
 	

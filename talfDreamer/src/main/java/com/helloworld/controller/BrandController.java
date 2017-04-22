@@ -1,70 +1,70 @@
 package com.helloworld.controller;
 
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.helloworld.model.Brand;
+import com.helloworld.model.SubCategory;
+
 import com.helloworld.service.BrandService;
+
 import com.helloworld.service.SubCategoryService;
+
+
+
 
 
 
 @Controller
 public class BrandController {
 
-	@Autowired
-	private BrandService brandService;
-
-	@Autowired
-	private SubCategoryService subCategoryService;
-
-	@RequestMapping("/brandPage")
-	public String getBrandPage(Model model) {
-		model.addAttribute("brand", new Brand());
-		model.addAttribute("brandList", brandService.fetchAllBrand());
-		model.addAttribute("subCategoryList", subCategoryService.listSubCategory());
-		model.addAttribute("brandListByJson", brandService.fetchAllBrandByJson());
-		
-		model.addAttribute("btnLabel", "Add Brand");
-		return "brand";
-	}
-
-	@RequestMapping("/addBrand")
-	public String addBrand(@Valid @ModelAttribute("brand") Brand brand, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("brandList", brandService.fetchAllBrand());
-			model.addAttribute("brandListByJson", brandService.fetchAllBrandByJson());
-			
-			model.addAttribute("subCategoryList", subCategoryService.listSubCategory());
-			model.addAttribute("btnLabel", "Retry");
-			return "brand";
-		}
-		brandService.addBrand(brand);
-		return "redirect:/brandPage";
-	}
-
-	@RequestMapping("/editBrand-{brandId}")
-	public String editBrand(Model model, @PathVariable("brandId") int brandId) {
-		model.addAttribute("brand", brandService.getBrandById(brandId));
-		model.addAttribute("brandList", brandService.fetchAllBrand());
-		model.addAttribute("subCategoryList", subCategoryService.listSubCategory());
-		model.addAttribute("brandListByJson", brandService.fetchAllBrandByJson());
 	
-		model.addAttribute("btnLabel", "Edit Brand");
+	@Autowired
+	private BrandService brandservice;
+
+	@Autowired
+	private SubCategoryService subcategoryService;
+	
+	@RequestMapping("/brand")
+	public String getBrand(Model model) 
+	{
+		model.addAttribute("brand",new Brand());
+		model.addAttribute("subcategoryList", subcategoryService.listSubCategory());
+		model.addAttribute("brandList",brandservice.listBrand());
 		return "brand";
 	}
-
-	@RequestMapping("/deleteBrand-{brandId}")
-	public String deleteBrand(@PathVariable("brandId") int brandId) {
-		brandService.deleteBrand(brandId);
-		return "redirect:/brandPage";
+	
+	@RequestMapping("/addbrand")
+	public String addSubCatgory(Model model,@ModelAttribute("brand") Brand brand) 
+	{
+		
+	brandservice.addBrand(brand);
+		return "redirect:/brand";
 	}
-
+	@RequestMapping(value="/editbrand-{brandId}", method= RequestMethod.GET)
+	public String editbrand(@PathVariable("brandId") int brandId,Model model)
+	{
+		Brand brand=brandservice.getBrandById(brandId);
+		System.out.println("Id is:"+ brand.getBrandId());
+		/*System.out.println("Name is:"+brand.getbrandName());
+		session.setAttribute("brandId", brand.getbrandId());*/
+		model.addAttribute("brand", brand);
+		model.addAttribute("brandList",brandservice.listBrand());
+		model.addAttribute("subcategoryList",subcategoryService.listSubCategory());
+		return"brandform";
+	}
+	@RequestMapping("/deletebrand-{brandId}")
+	public String deletebrand(@PathVariable("brandId") int brandId)
+	{
+		brandservice.deleteBrand(brandId);
+		return"redirect:/brand";
+	}
 }

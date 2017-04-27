@@ -2,77 +2,34 @@ package com.helloworld.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.helloworld.dao.UserDAOImpl;
-import com.helloworld.model.BillingAddress;
-import com.helloworld.model.ShippingAddress;
 import com.helloworld.model.User;
-
 @Service
 @Transactional
-public class UserService 
-{
+public class UserService {
+
 	@Autowired
-	UserDAOImpl userDAOImpl;
-	
-	public void addUser(User user)
-	{
-		userDAOImpl.addUser(user);
-	}
-	
-	public void updateUser(User user)
-	{
-		userDAOImpl.updateUser(user);
+	UserDAOImpl userDaoImpl;
+
+	public void addUser(User userReg) {
+		// TODO Auto-generated method stub
+		userDaoImpl.addUser(userReg);
+
 	}
 
-	public User getUserId(int userId)
-	{
-		return userDAOImpl.getUserId(userId);		
+	public List<User> listUsers() {
+		// TODO Auto-generated method stub
+		return userDaoImpl.listUsers();
 	}
 	
-	public User getUserByusername(String username)
-	{
-		return userDAOImpl.getUserByusername(username);
+	public User getUserById(int userId){
+		return userDaoImpl.getUserById(userId);
 	}
-	
-	public String fetchAllUserByJson()
-	{
-		return userDAOImpl.fetchAllUserByJson();
+	public User getUserByName(String userName){
+		return userDaoImpl.getUserByName(userName);
 	}
-	
-	public void toggleUserStatus(int userId)
-	{
-		userDAOImpl.toggleUserStatus(userId);
-	}
-	
-	public List<User> fetchAllUser() 
-	{
-		return userDAOImpl.fetchAllUser();
-	}
-	
-	public void addShippingAddress(ShippingAddress shippingAddress) 
-	{
-		userDAOImpl.addShippingAddress(shippingAddress);
-	}
-
-	public void addBillingAddress(BillingAddress billingAddress) {
-		userDAOImpl.addBillingAddress(billingAddress);
-		
-	}
-	
-	public BillingAddress getBillingAddressById(int userId)
-	{
-		return userDAOImpl.getBillingAddressById(userId);
-	}
-	
-	public ShippingAddress getShippingAddressById(int userId)
-	{
-		return userDAOImpl.getShippingAddressById(userId);
-	}
-	
-	
 }

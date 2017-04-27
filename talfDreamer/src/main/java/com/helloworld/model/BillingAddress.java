@@ -2,22 +2,14 @@ package com.helloworld.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import com.google.gson.annotations.Expose;
 
 @Entity
 public class BillingAddress implements Serializable
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+ static final long serialVersionUID = 1L;
 
 	@Id
 	@Expose
@@ -147,4 +139,3 @@ public class BillingAddress implements Serializable
 		this.user = user;
 	}
 }
-	

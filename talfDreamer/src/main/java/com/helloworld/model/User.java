@@ -1,92 +1,64 @@
 package com.helloworld.model;
 
-
 import java.io.Serializable;
-import java.util.Set;
-
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
-
-import com.google.gson.annotations.Expose;
-
 
 @Entity
-public class User implements Serializable
-{
+public class User implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2489948115377222670L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Expose
 	private int userId;
-	
-	@Expose
-	private String username;
-	
-	@Expose
+	private String userName;
 	private String password;
-	
-	@Expose
 	private boolean enabled;
-	
-	@Expose
 	private String role;
-	
-	@Expose
-	private String fname;
-	
-	@Expose
-	private String lname;
-	
-	@Expose
-	private String DOB;
-	
-	@Expose
-	private String contactNo;
-	
-	@Expose
-	private String alternateContactNo;
-	
-	@OneToOne
-	public BillingAddress billingAddress;
-	
-	@OneToOne
-	public ShippingAddress shippingAddress;
-	
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
-	private Set<CartItems> cartItems;
-
 		
-	public Set<CartItems> getCartItems() {
-		return cartItems;
+	private String fname;
+	private String lname;
+
+	private String contactnumber;
+	
+	
+	/*@OneToOne
+	@JoinColumn(name="billingAddressId")
+	private BillingAddress billingAddress;
+	
+	@OneToOne
+	@JoinColumn(name="shippingAddressId")
+	private ShippingAddress shippingAddress;
+*/
+	
+	
+	
+	public String getFname() {
+		return fname;
 	}
-	public void setCartItems(Set<CartItems> cartItems) {
-		this.cartItems = cartItems;
+	public void setFname(String fname) {
+		this.fname = fname;
 	}
-	public BillingAddress getBillingAddress() {
-		return billingAddress;
+	
+	public String getLname() {
+		return lname;
 	}
-	public void setBillingAddress(BillingAddress billingAddress) {
-		this.billingAddress = billingAddress;
+	public void setLname(String lname) {
+		this.lname = lname;
 	}
-	public ShippingAddress getShippingAddress() {
-		return shippingAddress;
+	
+	public String getContactnumber() {
+		return contactnumber;
 	}
-	public void setShippingAddress(ShippingAddress shippingAddress) {
-		this.shippingAddress = shippingAddress;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setContactnumber(String contactnumber) {
+		this.contactnumber = contactnumber;
 	}
 	public int getUserId() {
 		return userId;
@@ -94,11 +66,11 @@ public class User implements Serializable
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getPassword() {
 		return password;
@@ -118,35 +90,6 @@ public class User implements Serializable
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public String getFname() {
-		return fname;
-	}
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-	public String getLname() {
-		return lname;
-	}
-	public void setLname(String lname) {
-		this.lname = lname;
-	}
-	public String getDOB() {
-		return DOB;
-	}
-	public void setDOB(String dOB) {
-		DOB = dOB;
-	}
 
-	public String getContactNo() {
-		return contactNo;
-	}
-	public void setContactNo(String contactNo) {
-		this.contactNo = contactNo;
-	}
-	public String getAlternateContactNo() {
-		return alternateContactNo;
-	}
-	public void setAlternateContactNo(String alternateContactNo) {
-		this.alternateContactNo = alternateContactNo;
-	}
+	
 }

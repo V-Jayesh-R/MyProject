@@ -8,7 +8,7 @@ package com.helloworld.service;
 	import org.springframework.stereotype.Service;
 	import org.springframework.transaction.annotation.Transactional;
 
-import com.helloworld.dao.SupplierDAOImpl;
+import com.helloworld.daoimpl.SupplierDAOImpl;
 import com.helloworld.model.Supplier;
 
 	

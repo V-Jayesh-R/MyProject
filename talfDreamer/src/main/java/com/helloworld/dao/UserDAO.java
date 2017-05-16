@@ -2,7 +2,6 @@ package com.helloworld.dao;
 
 import java.util.List;
 
-
 import com.helloworld.model.User;
 
 public interface UserDAO {
@@ -13,6 +12,4 @@ public interface UserDAO {
 	public List<User> listUsers();
 	public User getUserById(int userId);
 	public User getUserByName(String userName);
-
-	
 }

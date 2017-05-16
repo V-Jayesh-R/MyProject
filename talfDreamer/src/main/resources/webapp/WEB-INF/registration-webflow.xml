@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+                          
+    <var name="user" class="com.helloworld.model.User" />
+	<!-- <var name="shippingAddress" class="com.perfume.model.ShippingAddress" />
+	<var name="billingAddress" class="com.perfume.model.BillingAddress" /> -->
+	
+	<!-- Executed when webFlow is triggered -->
+	<on-start>
+		<evaluate expression="registrationHandler.initFlow()" result="flowScope.user" />
+	</on-start>
+	
+	<view-state id="start" view="userform" model="user">
+	<!-- <transition on="submit" to="validate" />
+	<transition on="reset" to="reset" /> -->
+	</view-state>
+	
+	<end-state id="registrationSuccessful" view="registrationSuccess" />
+	<end-state id="login" view="login" />
+	<end-state id="home" view="index" />
+	
+	</flow>

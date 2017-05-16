@@ -1,0 +1,15 @@
+2017-05-15 17:27:47,706 [Worker-17] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: com.ajinteriordesigningsforhome:talfDreamer:0.0.1-SNAPSHOT @ F:\flate\workspace rt\talfDreamer\pom.xml.
+2017-05-15 17:27:47,706 [Worker-15] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: com.ajinteriordesigningsforhome:talfDreamer:0.0.1-SNAPSHOT @ F:\flate\workspace rt\talfDreamer\pom.xml.
+2017-05-15 17:27:50,915 [Worker-17] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-05-15 17:27:50,947 [Worker-17] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 79 resources
+2017-05-15 17:27:51,155 [Worker-17] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-05-15 17:27:51,157 [Worker-17] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\flate\workspace rt\talfDreamer\src\test\resources
+2017-05-15 17:27:53,149 [Worker-18] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: com.ajinteriordesigningsforhome:talfDreamer:0.0.1-SNAPSHOT @ F:\flate\workspace rt\talfDreamer\pom.xml.
+2017-05-15 17:27:53,476 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-05-15 17:27:53,489 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 79 resources
+2017-05-15 17:27:53,740 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-05-15 17:27:53,741 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\flate\workspace rt\talfDreamer\src\test\resources
+2017-05-15 17:27:55,277 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-05-15 17:27:55,279 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2017-05-15 17:27:55,281 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-05-15 17:27:55,282 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\flate\workspace rt\talfDreamer\src\test\resources

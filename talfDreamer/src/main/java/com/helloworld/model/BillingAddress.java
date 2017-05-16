@@ -1,141 +1,69 @@
 package com.helloworld.model;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
 
-import com.google.gson.annotations.Expose;
-
 @Entity
-public class BillingAddress implements Serializable
-{
- static final long serialVersionUID = 1L;
-
+public class BillingAddress {
+	
 	@Id
-	@Expose
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int billAddId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	private int billingAdddressId;
 	
-	@Expose
-	int userId;
+	public int getBillingAdddressId() {
+		return billingAdddressId;
+	}
+	public void setBillingAdddressId(int billingAdddressId) {
+		this.billingAdddressId = billingAdddressId;
+	}
+	public String getStreetAddress() {
+		return streetAddress;
+	}
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
+	}
+	public String getFlatNo() {
+		return flatNo;
+	}
+	public void setFlatNo(String flatNo) {
+		this.flatNo = flatNo;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getPostalCode() {
+		return postalCode;
+	}
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+	private String streetAddress;
+	private String flatNo;
+	private String city;
+	private String state;
+	private String postalCode;
 	
-	@Expose
-	private String billAddName;
+/*	@OneToOne
+	private UserReg userReg;*/
 	
-	@Expose
-	private String bPrefix;
-	
-	@Expose
-	private String bLandmark;
-	
-	@Expose
-	private String bStreet;
-	
-	@Expose	
-	private String bCity;
-	
-	@Expose
-	private String bDistrict;
-	
-	@Expose
-	private String bState;
-	
-	@Expose
-	private int bPIN;
-	
-	@OneToOne
-	@JoinColumn(name="userId", nullable=false , updatable=false , insertable=false )
+	@ManyToOne
+	@JoinColumn(name="userId",updatable=false,insertable=false,nullable=false)
 	private User user;
-
-	public int getBillAddId() {
-		return billAddId;
-	}
-
-	public void setBillAddId(int billAddId) {
-		this.billAddId = billAddId;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public String getBillAddName() {
-		return billAddName;
-	}
-
-	public void setBillAddName(String billAddName) {
-		this.billAddName = billAddName;
-	}
-
-	public String getbPrefix() {
-		return bPrefix;
-	}
-
-	public void setbPrefix(String bPrefix) {
-		this.bPrefix = bPrefix;
-	}
-
-	public String getbLandmark() {
-		return bLandmark;
-	}
-
-	public void setbLandmark(String bLandmark) {
-		this.bLandmark = bLandmark;
-	}
-
-	public String getbStreet() {
-		return bStreet;
-	}
-
-	public void setbStreet(String bStreet) {
-		this.bStreet = bStreet;
-	}
-
-	public String getbCity() {
-		return bCity;
-	}
-
-	public void setbCity(String bCity) {
-		this.bCity = bCity;
-	}
-	
-	public String getbDistrict() {
-		return bDistrict;
-	}
-
-	public void setbDistrict(String bDistrict) {
-		this.bDistrict = bDistrict;
-	}
-
-	public String getbState() {
-		return bState;
-	}
-
-	public void setbState(String bState) {
-		this.bState = bState;
-	}
-
-	public int getbPIN() {
-		return bPIN;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public void setbPIN(int bPIN) {
-		this.bPIN = bPIN;
-	}
 
 	public User getUser() {
 		return user;
 	}
-
-	public void setUser(User user) {
+	public void setUserReg(User user) {
 		this.user = user;
 	}
+
 }

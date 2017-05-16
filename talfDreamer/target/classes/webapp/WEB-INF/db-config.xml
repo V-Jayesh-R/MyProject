@@ -13,6 +13,7 @@
 
 
   <mvc:annotation-driven></mvc:annotation-driven>
+  
   <context:component-scan  base-package="com.helloworld" />
      
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -27,7 +28,7 @@
   </bean>
      
      <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-    <property name="dataSource" ref="datasource" />
+    <property name="datasource" ref="datasource" />
 
         <property name="packagesToScan">
             <list>
@@ -50,6 +51,7 @@
     
 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 </bean>
-
+<bean id="user" class="com.helloworld.model.User">
+</bean>
 
 </beans>

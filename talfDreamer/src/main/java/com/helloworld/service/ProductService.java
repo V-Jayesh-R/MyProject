@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.helloworld.dao.ProductDAOImpl;
+import com.helloworld.daoimpl.ProductDAOImpl;
 import com.helloworld.model.Product;
 
 

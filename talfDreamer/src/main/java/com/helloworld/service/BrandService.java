@@ -8,8 +8,7 @@ package com.helloworld.service;
 	import org.springframework.stereotype.Service;
 	import org.springframework.transaction.annotation.Transactional;
 
-import com.helloworld.dao.BrandDAOImpl;
-
+import com.helloworld.daoimpl.BrandDAOImpl;
 import com.helloworld.model.Brand;
 
 

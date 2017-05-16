@@ -2,11 +2,7 @@ package com.helloworld.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class User implements Serializable{
@@ -25,9 +21,7 @@ public class User implements Serializable{
 		
 	private String fname;
 	private String lname;
-
 	private String contactnumber;
-	
 	
 	/*@OneToOne
 	@JoinColumn(name="billingAddressId")
@@ -37,8 +31,6 @@ public class User implements Serializable{
 	@JoinColumn(name="shippingAddressId")
 	private ShippingAddress shippingAddress;
 */
-	
-	
 	
 	public String getFname() {
 		return fname;

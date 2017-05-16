@@ -1,34 +1,23 @@
 package com.helloworld.model;
 
-import java.io.Serializable;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
-public class Cart implements Serializable
-{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
+public class Cart {
 	@Id
 	private int cartId;
 	private int userId;
 	
 	@OneToOne
-	@JoinColumn(name="userId", insertable=false, nullable=false, updatable=false)
+	@JoinColumn(name="userId",insertable=false,nullable=false,updatable=false)
 	public User user;
-
-	public int getCartId() {
-		return cartId;
+	
+	public User getuser() {
+		return user;
 	}
 
-	public void setCartId(int cartId) {
-		this.cartId = cartId;
+	public void setuser(User user) {
+		this.user = user;
 	}
 
 	public int getUserId() {
@@ -39,13 +28,12 @@ public class Cart implements Serializable
 		this.userId = userId;
 	}
 
-	public User getUser() {
-		return user;
+	public int getCartId() {
+		return cartId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
 	}
-	
-	
+
 }

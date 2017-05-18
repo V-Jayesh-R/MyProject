@@ -1,23 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-        <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ page isELIgnored="false" %>
-<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-
- 
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<body>
-
+<%@ include file="adminhome.jsp" %>
 	
 	<div class="container">
 	<div class="text-center">  		   
@@ -91,8 +72,8 @@
                         <th>Delete Product</th>
                     </tr>
                   <c:forEach items="${productList}" var="c">
-                  <tr>
-                  	<td><img src="Resources/ProductImages/${c.productId}.jpg" width="100px" height="100px"></td>
+                  <tr ng-repeat="pl in myscope | filter:search">
+                  	
                     <td>${c.productId}</td>
                     <td>${c.productName}</td>
                     <td>${c.productDescription}</td>
@@ -103,11 +84,10 @@
                     <td><a href="viewproduct-${c.productId}"><button type="button" class="btn btn-success">View</button></a></td>
                     <td><a href="editproduct-${c.productId}"><button type="button" class="btn btn-success">Edit</button></a></td>
                     <td><a href="deleteproduct-${c.productId}"><button type="button" class="btn btn-success">Delete</button></a></td>
+                    <td><img src="./resources/ProductImages/productimage/${c.productId}.jpg" width="80px" height="80px"></td>
                     </tr>
                 </c:forEach>
             </table>
 	
 	
-
-</body>
-</html>
+<%@ include file="footer.jsp" %>

@@ -72,8 +72,8 @@
                         <th>Delete Product</th>
                     </tr>
                   <c:forEach items="${productList}" var="c">
-                  <tr>
-                  	<td><img src="Resources/ProductImages/${c.productId}.jpg" width="100px" height="100px"></td>
+                  <tr ng-repeat="pl in myscope | filter:search">
+                  	
                     <td>${c.productId}</td>
                     <td>${c.productName}</td>
                     <td>${c.productDescription}</td>
@@ -84,11 +84,10 @@
                     <td><a href="viewproduct-${c.productId}"><button type="button" class="btn btn-success">View</button></a></td>
                     <td><a href="editproduct-${c.productId}"><button type="button" class="btn btn-success">Edit</button></a></td>
                     <td><a href="deleteproduct-${c.productId}"><button type="button" class="btn btn-success">Delete</button></a></td>
+                    <td><img src="./resources/ProductImages/productimage/${c.productId}.jpg" width="80px" height="80px"></td>
                     </tr>
                 </c:forEach>
             </table>
 	
 	
-
-</body>
-</html>
+<%@ include file="footer.jsp" %>

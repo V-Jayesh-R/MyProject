@@ -41,7 +41,7 @@ public class SubCategoryController
 	subcategoryservice.addSubCategory(subCategory);
 		return "redirect:/subcategory";
 	}
-	@RequestMapping(value="/editsubcategory-{subCategoryId}", method= RequestMethod.GET)
+	@RequestMapping(value="/editsubcategory-{subcategoryId}", method= RequestMethod.GET)
 	public String editSubCategory(@PathVariable("subCategoryId") int subCategoryId,Model model)
 	{
 		SubCategory subcategory=subcategoryservice.getSubCategoryById(subCategoryId);
@@ -57,6 +57,6 @@ public class SubCategoryController
 	public String deleteSubCategory(@PathVariable("subCategoryId") int subCategoryId)
 	{
 		subcategoryservice.deleteSubCategory(subCategoryId);
-		return"redirect:/subcategory";
+		return"subcategory";
 	}
 }

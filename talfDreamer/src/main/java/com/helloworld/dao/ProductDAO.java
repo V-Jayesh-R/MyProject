@@ -14,4 +14,5 @@ public interface ProductDAO {
 	public Product getProductById(int ProductId);
 	public void deleteProduct(int ProductId);
 	public Product getProductByName(String productName);
+	public String productSearchSubCatJson(int subCategoryId);
 }

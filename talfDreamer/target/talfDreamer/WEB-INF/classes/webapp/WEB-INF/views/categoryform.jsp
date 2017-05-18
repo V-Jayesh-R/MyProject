@@ -1,15 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" isELIgnored="false"%>
-     <%@ taglib prefix="c" 
-           uri="http://java.sun.com/jsp/jstl/core" %>
-            <%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>CATEGORYNAME</title>
-</head>
-<body>
+<%@ include file="adminhome.jsp" %>
 <form:form action="addcategory" modelAttribute="category">
 <br>
 <div class="container" style="border: 2px solid blue; padding: 15px;">
@@ -44,10 +33,8 @@
 <td>${clist.categoryId}</td>
 <td>${clist.categoryName}</td>
 <td>${clist.categoryDescription}</td>
-<td><a href="updatecategory-${clist.categoryId}" class="btn btn-primary">Edit</a> | <a href="deletecategory-${clist.categoryId}" class="btn btn-default">Delete</a></td>
+<td><a href="updateCategoryById-{{clist.categoryId}}" class="btn btn-warning" data-toggle="tooltip" title="edit" role="button"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+	<a href="deleteCategoryById-{{clist.categoryId}}" class="btn btn-danger" data-toggle="tooltip" title="Delete" role="button"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a></td>
 </tr>
 </c:forEach>
-</table>
-</div>
-</body>
-</html>
+ <%@ include file="footer.jsp" %>

@@ -28,7 +28,7 @@
   </bean>
      
      <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-    <property name="datasource" ref="datasource" />
+    <property name="dataSource" ref="datasource" />
 
         <property name="packagesToScan">
             <list>
@@ -50,8 +50,6 @@
     </bean>
     
 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-</bean>
-<bean id="user" class="com.helloworld.model.User">
 </bean>
 
 </beans>

@@ -57,4 +57,14 @@ public class ProductDAOImpl implements ProductDAO{
 		String listProductByJson=g.toJson(productlist);
 		return listProductByJson;
 	}
+	public String productSearchSubCatJson(int subCategoryId) {
+		List<Product> getList = sessionFactory.getCurrentSession().createQuery("from Product where subCategoryId="+subCategoryId).getResultList();
+		Gson g=new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String list=g.toJson(getList);
+		return list;
+	}
+	public void updateQuantity(int productId,int productQuantity)
+	{
+		sessionFactory.getCurrentSession().createQuery("UPDATE Product set productStock="+productQuantity+"where productId="+productId).executeUpdate();
+	}
 }

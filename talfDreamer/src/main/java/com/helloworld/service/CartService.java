@@ -7,33 +7,44 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.helloworld.dao.CartItemImpl;
-import com.helloworld.model.CartItems;
+import com.helloworld.daoimpl.CartDAOImpl;
+import com.helloworld.model.CartItem;
 
 @Service
 @Transactional
-public class CartService 
-{
-	@Service
-	@Transactional
-	public class CartItemService  {
-		@Autowired
-		CartItemImpl cartItemImpl;
+public class CartService {
 
-		public void addToCart(CartItems cartItem) {
-			// TODO Auto-generated method stub
-			cartItemImpl.addToCart(cartItem);
-		}
+	@Autowired
+	private CartDAOImpl cartDAOImpl;
 
-		public List<CartItems> getCartListByUserId(int userId) {
-			// TODO Auto-generated method stub
-			return cartItemImpl.getCartListByUserId(userId);
-		}
+	public void addToCart(CartItem cartItems) {
+
+		cartDAOImpl.addToCart(cartItems);
+	}
+
+	public String displayCart(int userId) {
+
+		return cartDAOImpl.displayCart(userId);
+	}
+	
+	public List<CartItem> displayCartByList(int userId) {
 		
-		public String listCartItemByJson(int userId) {
-			
-			return cartItemImpl .listCartItemByJson(userId);
-		}
+		return cartDAOImpl.displayCartByList(userId);
+	}
 
+	public void deleteFromCart(int cartItemId) {
+
+		cartDAOImpl.deteleFromCart(cartItemId);
+	}
+	
+	public void updateCart(int cartItemId, double cartTotalAmount, int cartItemQuantity) {
+		
+		cartDAOImpl.updateCart(cartItemId, cartTotalAmount, cartItemQuantity);
+	}
+	
+	public void updateCartOrders(int userId) {
+		
+		cartDAOImpl.updateCartOrders(userId);
 	}
 }
+

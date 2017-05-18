@@ -24,10 +24,10 @@
                 <h4>Pages -</h4>
             	<div class="col-md-6">
                     <ul class="list">
-                        <li><a href="/MobilesEra/">Home</a></li>
+                        <li><a href="/talfDreamer/">Home</a></li>
                         <li><a href="contactus">Contacts</a></li>
                         <li><a href="aboutus">About Us</a></li>
-                        <li><a href="faq">FAQ's</a></li>
+                        <li><a href="faqs">FAQ's</a></li>
                     </ul>
                 </div>
             </div>

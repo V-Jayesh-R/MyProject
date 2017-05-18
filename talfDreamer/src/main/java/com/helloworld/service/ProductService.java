@@ -50,4 +50,10 @@ public class ProductService {
 	{
 		return productDaoImpl.listProductByJson();
 	}
+	public String productSearchSubCatJson(int subCategoryId) {
+		return productDaoImpl.productSearchSubCatJson(subCategoryId);
+	}
+	public void updateQuantity(int productId,int productQuantity) {
+		productDaoImpl.updateQuantity(productId, productQuantity);
+	}
 }

@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
   <context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/db-config.xml,/WEB-INF/spring-security.xml,/WEB-INF/webflow-context.xml</param-value>
+		<param-value>/WEB-INF/db-config.xml,/WEB-INF/spring-security.xml</param-value>
 	</context-param>
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>

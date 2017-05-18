@@ -76,12 +76,11 @@ public class ProductController
 			model.addAttribute("brandList", brandService.listBrand());
 			return "product";
 		}
-	
-		productService.addProduct(product);
+			
 		
 			
 		//Multipart File Upload
-		String path="C:\\Users\\Jayesh\\workspace\\talfDreamer\\src\\main\\resources\\ProductImages\\productimage\\";
+		String path="F:\\Newproject\\Workspace34\\talfDreamer\\src\\main\\resources\\webapp\\resources\\ProductImages\\productimage\\";
 	try{
 		path = path+""+product.getProductId()+".jpg";
 		System.out.println("Image Path is:"+path);
@@ -110,7 +109,7 @@ public class ProductController
 					e.getMessage();
 					
 				}
-		
+		productService.addProduct(product);
 		return "redirect:/product";
 		}
 	
@@ -141,6 +140,6 @@ public class ProductController
 	public String deleteProduct(@PathVariable("productId") int productId)
 	{
 		productService.deleteProduct(productId);
-		return "redirect:/product";
+		return "product";
 	}
 }
